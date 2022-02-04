@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basic Study</title>
+    <script> </script>
+
+    <!--react를 사용하기 위한 코드, react & reactDom-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+<body>
+    <div id="root"></div>
+    <script>
+        const e = React.createElement;
+
+        //React안에서 component를 상속받아 와서 LikeButton 컴포넌트를 만든다
+        class LikeButton extends React.Component {
+            //constructor : 생성자
+            constructor(props) {
+                super(props);
+            }
+            //render : 컴포넌트가 화면에서 어떻게 보여질지
+            render() {
+                //<button>Like</button>를 만들예정이다, 만들었다는게 아님
+                //return e('만들 태그', {태그의 속성값을 입력, 객체 형식으로 입력}}, '태그 사이 들어가는 값');
+                return e('button', {
+                    onClick: () => {
+                        console.log('clicked');
+                    },
+                    type: 'submit'
+                }, 'Like');
+
+            }
+        }
+    </script>
+    <script>
+        //eactDom.render(e(컴포넌트 이름), 컴포넌트를 추가할 곳);
+        //document,querySelector를 통해서 컴포넌트를 추가할 곳을 찾고
+        //클래스 문법으로 작성한컴포넌트를 화면에 실제로 구현한다
+        //결과적으로 root div 안에 컴포넌트가 추가된다
+        ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+    </script>
+</body>
+
+</html>
