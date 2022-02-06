@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Basic Study</title>
+
+    <!--react를 사용하기 위한 코드, react & reactDom-->
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <!--babel을 사용하기 위한 코드-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const GameBaseball = () => {
+            const [num, setNumber] = React.useState(0);
+            const [text, setText] = React.useState('');
+
+            //useRef
+            const inputEl = React.useRef(null);
+            const onClick = (e) => {
+                setNumber(c => c + 1);
+                //버튼 클릭시 input box에 포커싱된다
+                inputEl.current.focus();
+            };
+            const onChange = (e) => {
+                setText(e.target.value);
+            };
+
+
+            return (
+                <div>
+                    <div>
+                        <button
+                            style={{ margin: '20px' }}
+                            onClick={onClick}>
+                            {num}
+                        </button>
+                    </div>
+                    <input
+                        ref={inputEl}
+                        value={text}
+                        onChange={onChange} />
+                    <Test />
+                </div>
+            );
+        };
+        //memo를 사용하지 않으면 부모 컴포넌트가 리렌더링될때
+        //Test 컴포넌트 또한 변화가 없더라도 리렌더링된다
+        const Test = React.memo(
+            () => {
+                return (
+                    <div>
+                        변화하지 않는 컴포넌트
+                    </div>
+                );
+            });
+        ReactDOM.render(
+            <div>
+                <GameBaseball />
+            </div>, document.querySelector('#root'));
+    </script>
+</body>
+
+</html>
